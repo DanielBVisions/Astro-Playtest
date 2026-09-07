@@ -46,6 +46,7 @@ const steps = [
 				{
 					steps.map((step) => (
 						<li class={`shift__row shift__row--${step.side}`}>
+							<span class="shift__dot" aria-hidden="true"></span>
 							<span class="shift__number">{step.number}</span>
 							<div class="shift__content">
 								<p class="shift__label">{step.label}</p>
@@ -113,7 +114,12 @@ const steps = [
 	.shift__row {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
-		align-items: center;
+		/* start, not center: with center, row 2's much-shorter content
+		   block was centering against the *taller* of its own two grid
+		   items in a way that put it well below the numeral instead of
+		   alongside it. start pins both to the row's top edge, which is
+		   consistent regardless of how tall the numeral vs. content is. */
+		align-items: start;
 		gap: 40px;
 		padding-block: 32px;
 		position: relative;
@@ -122,6 +128,18 @@ const steps = [
 		   until they're centered in view, once it confirms it can run the
 		   interaction — never left permanently dim if JS fails to load. */
 		opacity: 1;
+	}
+
+	.shift__dot {
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		width: 14px;
+		height: 14px;
+		border-radius: 50%;
+		background: var(--color-purple);
+		z-index: 1;
 	}
 
 	.shift__number {
@@ -175,6 +193,10 @@ const steps = [
 
 	@media (max-width: 700px) {
 		.shift__line {
+			left: 4px;
+		}
+
+		.shift__dot {
 			left: 4px;
 		}
 

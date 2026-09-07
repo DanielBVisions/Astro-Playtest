@@ -83,9 +83,10 @@ function initCardReveals() {
 }
 
 // "The shift" timeline: the centre line fills as the section scrolls
-// through view (scrubbed, tied directly to scroll position), and each
-// row dims to 40% opacity except while it's the one centered in the
-// viewport — a lightweight "active step" cue, not a one-time reveal.
+// through view (scrubbed, tied directly to scroll position). The first
+// row starts highlighted (it's the current/active step by default); each
+// later row lights up permanently — once, not toggled back and forth —
+// the first time it's scrolled to, like steps being checked off.
 function initTimelineScroll() {
 	const wrap = document.querySelector('.shift__timeline-wrap');
 	if (!wrap) return;
@@ -104,16 +105,18 @@ function initTimelineScroll() {
 		});
 	}
 
-	wrap.querySelectorAll('.shift__row').forEach((row) => {
+	wrap.querySelectorAll('.shift__row').forEach((row, index) => {
+		if (index === 0) {
+			gsap.set(row, { opacity: 1 });
+			return;
+		}
+
 		gsap.set(row, { opacity: 0.4 });
 		ScrollTrigger.create({
 			trigger: row,
 			start: 'top center',
-			end: 'bottom center',
-			onEnter: () => gsap.to(row, { opacity: 1, duration: 0.3, overwrite: true }),
-			onEnterBack: () => gsap.to(row, { opacity: 1, duration: 0.3, overwrite: true }),
-			onLeave: () => gsap.to(row, { opacity: 0.4, duration: 0.3, overwrite: true }),
-			onLeaveBack: () => gsap.to(row, { opacity: 0.4, duration: 0.3, overwrite: true }),
+			once: true,
+			onEnter: () => gsap.to(row, { opacity: 1, duration: 0.3 }),
 		});
 	});
 }
