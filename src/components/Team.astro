@@ -1,10 +1,12 @@
 ---
 // Copy from Figma nodes 1502:8011/8020/8021/8070 (heading), 1502:8097-8108
-// (team cards), 1502:8109-8110 (wider team blurb + CTA card). Photos are
-// the real exports from Daniel's About.zip: team-banner.png (Rectangle
-// 682) and team-*.png (Rectangles 677-680, matched to names by their x
-// position in Figma: 677→Jordan Blake, 678→Maya Chen, 679→Alex Rees,
-// 680→Sophie Moore).
+// (team cards), 1502:8109-8110 (wider team blurb + CTA card). Card style
+// (white bg, rounded-16, purple glow shadow) confirmed via
+// get_design_context on 1502:8092 "Rectangle 673" — 250x408 with a 15px
+// inset for the avatar. Photos are the real exports from Daniel's
+// About.zip: team-banner.png (Rectangle 682) and team-*.png (Rectangles
+// 677-680, matched to names by their x position in Figma: 677→Jordan
+// Blake, 678→Maya Chen, 679→Alex Rees, 680→Sophie Moore).
 const team = [
 	{
 		name: 'Jordan Blake',
@@ -117,14 +119,20 @@ const team = [
 	}
 
 	.team__card {
-		padding: 0;
+		background: var(--color-text-invert);
+		border-radius: var(--radius-card);
+		box-shadow: 0 25px 100px 0 rgba(101, 8, 251, 0.15);
+		padding: 15px;
+		aspect-ratio: 250 / 408;
+		display: flex;
+		flex-direction: column;
 	}
 
 	.team__avatar {
 		aspect-ratio: 1;
 		width: 100%;
 		object-fit: cover;
-		border-radius: var(--radius-card);
+		border-radius: 12px;
 		margin-bottom: 16px;
 	}
 
@@ -159,7 +167,7 @@ const team = [
 		flex-direction: column;
 		justify-content: space-between;
 		color: var(--color-text-invert);
-		aspect-ratio: 1;
+		aspect-ratio: 250 / 408;
 	}
 
 	.team__join-copy {

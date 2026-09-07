@@ -64,14 +64,20 @@
 		opacity: 0.9;
 	}
 
+	/*
+	  Figma's canvas coordinates (node 1502:7005 right ribbon at y=799 vs
+	  node 1502:6088 left ribbon at y=1095) put the right ribbon near the
+	  section top and the left ribbon roughly a third of the way down —
+	  not mirrored top/bottom.
+	*/
 	.mission__ribbon--left {
 		left: -140px;
-		top: -40px;
+		top: 32%;
 	}
 
 	.mission__ribbon--right {
 		right: -140px;
-		bottom: -60px;
+		top: -30px;
 		transform: scaleX(-1);
 	}
 

@@ -1,8 +1,9 @@
 ---
-// Copy from Figma nodes 1502:8008/8015/8025. Collage photos and stat
-// badges are the real exported assets from Daniel's About.zip
-// (14 1.png, 113 1.png, 12 1.png → node names "14 1"/"113 1"/"12 1";
-// Group 70/71/69.png are the pre-composited stat cards).
+// Copy from Figma nodes 1502:8008/8015/8025. Collage layout uses the exact
+// left/top/width/height values from get_design_context on node 1505:4422
+// "Group 73" (percentages there are relative to its own 646x561 box —
+// converted here to % of that box for a fluid container). Photos and stat
+// badges are the real exported assets from Daniel's About.zip.
 ---
 
 <section class="hero">
@@ -31,7 +32,7 @@
 <style>
 	.hero {
 		padding-top: 64px;
-		padding-bottom: 64px;
+		padding-bottom: 120px;
 	}
 
 	.hero__grid {
@@ -62,9 +63,16 @@
 		margin: 0;
 	}
 
+	/*
+	  646x561 reference box (Group 73's own bounding box). Children are
+	  positioned as % of that box, matching Figma's local left/top/width/
+	  height exactly, so some legitimately bleed past 100% — that's the
+	  real design, not a bug, so no overflow:hidden here.
+	*/
 	.hero__collage {
 		position: relative;
 		aspect-ratio: 646 / 561;
+		margin-bottom: 60px;
 	}
 
 	.hero__photo {
@@ -74,47 +82,48 @@
 	}
 
 	.hero__photo--a {
-		left: 0;
-		top: 35%;
-		width: 64%;
-		height: 60%;
+		left: 51.5%;
+		top: 34.9%;
+		width: 64.1%;
+		height: 59.2%;
 	}
 
 	.hero__photo--b {
-		right: 0;
-		top: 0;
-		width: 41%;
-		height: 59%;
+		left: 60.5%;
+		top: 90.2%;
+		width: 53.6%;
+		height: 41.5%;
 	}
 
 	.hero__photo--c {
-		right: 15%;
-		bottom: 0;
-		width: 44%;
-		height: 40%;
+		left: 79.7%;
+		top: 43.9%;
+		width: 41.2%;
+		height: 59.2%;
 	}
 
 	.hero__stat {
 		position: absolute;
-		width: 27%;
 		height: auto;
-		filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.12));
+		filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.1));
 	}
 
 	.hero__stat--views {
-		top: 0;
-		right: 8%;
+		left: 74.3%;
+		top: 31.7%;
+		width: 19.3%;
 	}
 
 	.hero__stat--partnerships {
-		bottom: 8%;
-		left: 40%;
-		width: 32%;
+		left: 57%;
+		top: 90.2%;
+		width: 26.3%;
 	}
 
 	.hero__stat--roi {
-		bottom: 0;
-		right: 0;
+		left: 79.4%;
+		top: 95.2%;
+		width: 19.3%;
 	}
 
 	@media (max-width: 900px) {
