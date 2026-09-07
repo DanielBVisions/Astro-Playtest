@@ -1,0 +1,104 @@
+---
+interface Props {
+	title: string;
+	description?: string;
+}
+
+const { title, description = 'SHOUT is the Creator Performance Platform built to change how brands and creators work together.' } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="description" content={description} />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<title>{title}</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+			rel="stylesheet"
+		/>
+	</head>
+	<body>
+		<slot />
+	</body>
+</html>
+
+<style is:global>
+	/*
+	  Placeholder design tokens.
+	  The real Figma file (SHOUT-Dev) uses tokens we couldn't read this
+	  session — the Figma MCP connection dropped before get_variable_defs /
+	  get_design_context could run. Swap these for the real values once
+	  Figma is reconnected.
+	*/
+	:root {
+		--color-bg: #0b0b0c;
+		--color-bg-raised: #141416;
+		--color-border: #26262a;
+		--color-text: #f5f5f7;
+		--color-text-muted: #9a9aa2;
+		--color-accent: #d7ff3d;
+		--color-accent-text: #0b0b0c;
+
+		--font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+		--max-width: 1312px;
+		--radius-lg: 24px;
+		--radius-md: 16px;
+		--radius-full: 999px;
+	}
+
+	*,
+	*::before,
+	*::after {
+		box-sizing: border-box;
+	}
+
+	html {
+		color-scheme: dark;
+	}
+
+	body {
+		margin: 0;
+		background: var(--color-bg);
+		color: var(--color-text);
+		font-family: var(--font-sans);
+		-webkit-font-smoothing: antialiased;
+	}
+
+	img {
+		max-width: 100%;
+		display: block;
+	}
+
+	.container {
+		width: 100%;
+		max-width: var(--max-width);
+		margin-inline: auto;
+		padding-inline: 24px;
+	}
+
+	.eyebrow {
+		display: inline-block;
+		font-size: 12px;
+		font-weight: 700;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--color-accent);
+		margin: 0 0 12px;
+	}
+
+	section {
+		padding-block: 96px;
+	}
+
+	@media (max-width: 720px) {
+		section {
+			padding-block: 56px;
+		}
+	}
+</style>

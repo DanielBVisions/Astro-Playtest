@@ -1,0 +1,117 @@
+---
+// The frame's Footer is a shared symbol instance (node 1502:7948) — its
+// content wasn't readable from the metadata this session pulled, so this
+// is a generic placeholder footer.
+const columns = [
+	{ heading: 'Product', links: ['Overview', 'For brands', 'For creators', 'Pricing'] },
+	{ heading: 'Company', links: ['About', 'Careers', 'Contact'] },
+	{ heading: 'Resources', links: ['Blog', 'Case studies', 'Support'] },
+];
+---
+
+<footer class="footer">
+	<div class="container footer__inner">
+		<div class="footer__brand">
+			<p class="footer__logo">SHOUT</p>
+			<p class="footer__tagline">The Creator Performance Platform.</p>
+		</div>
+
+		<div class="footer__columns">
+			{
+				columns.map((column) => (
+					<div>
+						<p class="footer__heading">{column.heading}</p>
+						<ul>
+							{column.links.map((link) => (
+								<li><a href="#">{link}</a></li>
+							))}
+						</ul>
+					</div>
+				))
+			}
+		</div>
+	</div>
+
+	<div class="container">
+		<p class="footer__legal">&copy; {new Date().getFullYear()} SHOUT. All rights reserved.</p>
+	</div>
+</footer>
+
+<style>
+	.footer {
+		border-top: 1px solid var(--color-border);
+		padding-block: 64px 32px;
+	}
+
+	.footer__inner {
+		display: grid;
+		grid-template-columns: 1fr 2fr;
+		gap: 48px;
+		margin-bottom: 48px;
+	}
+
+	.footer__logo {
+		font-weight: 800;
+		font-size: 20px;
+		letter-spacing: 0.04em;
+		margin: 0 0 8px;
+	}
+
+	.footer__tagline {
+		font-size: 14px;
+		color: var(--color-text-muted);
+		margin: 0;
+	}
+
+	.footer__columns {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 24px;
+	}
+
+	.footer__heading {
+		font-size: 12px;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--color-text-muted);
+		margin: 0 0 16px;
+	}
+
+	.footer__columns ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+	}
+
+	.footer__columns a {
+		color: var(--color-text);
+		text-decoration: none;
+		font-size: 14px;
+	}
+
+	.footer__columns a:hover {
+		color: var(--color-accent);
+	}
+
+	.footer__legal {
+		font-size: 13px;
+		color: var(--color-text-muted);
+		border-top: 1px solid var(--color-border);
+		padding-top: 24px;
+		margin: 0;
+	}
+
+	@media (max-width: 640px) {
+		.footer__inner {
+			grid-template-columns: 1fr;
+		}
+
+		.footer__columns {
+			grid-template-columns: 1fr 1fr;
+		}
+	}
+</style>

@@ -1,0 +1,36 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="SHOUT">
+	<main class="landing">
+		<h1>SHOUT</h1>
+		<p>This trial build only implements the <a href="/about">About</a> page from Figma.</p>
+	</main>
+</Layout>
+
+<style>
+	.landing {
+		min-height: 100vh;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 12px;
+		text-align: center;
+	}
+
+	.landing h1 {
+		font-size: 3rem;
+		font-weight: 800;
+		margin: 0;
+	}
+
+	.landing p {
+		color: var(--color-text-muted);
+	}
+
+	.landing a {
+		color: var(--color-accent);
+	}
+</style>

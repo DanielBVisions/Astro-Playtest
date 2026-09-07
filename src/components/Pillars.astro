@@ -1,0 +1,91 @@
+---
+// Copy from Figma nodes 1502:8016, 1502:8067, 1502:8062-64, 1502:8071-73
+const pillars = [
+	{
+		title: 'Real creators. Real impact.',
+		body: 'We champion authentic creators who drive real influence-not just inflated numbers. Quality over quantity, always.',
+	},
+	{
+		title: 'Performance at scale.',
+		body: 'Our platform combines data, automation and human expertise to run creator campaigns that deliver measurable business results.',
+	},
+	{
+		title: 'Culture first. Always.',
+		body: 'We stay close to internet culture so our campaigns feel native, not forced. Built with creators, for creators.',
+	},
+];
+---
+
+<section class="pillars">
+	<div class="container">
+		<h2>Our ethos. Built on three pillars.</h2>
+		<p class="pillars__lede">
+			SHOUT was built to bridge the gap between enterprise performance and the creator economy.
+			This is how we do it.
+		</p>
+
+		<div class="pillars__grid">
+			{
+				pillars.map((pillar) => (
+					<article class="pillars__card">
+						<h3>{pillar.title}</h3>
+						<p>{pillar.body}</p>
+					</article>
+				))
+			}
+		</div>
+	</div>
+</section>
+
+<style>
+	.pillars {
+		background: var(--color-bg-raised);
+	}
+
+	h2 {
+		font-size: clamp(1.75rem, 3vw, 2.5rem);
+		font-weight: 800;
+		letter-spacing: -0.01em;
+		margin: 0 0 16px;
+		max-width: 640px;
+	}
+
+	.pillars__lede {
+		font-size: 16px;
+		color: var(--color-text-muted);
+		max-width: 560px;
+		margin: 0 0 56px;
+	}
+
+	.pillars__grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 24px;
+	}
+
+	.pillars__card {
+		background: var(--color-bg);
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius-lg);
+		padding: 32px;
+	}
+
+	.pillars__card h3 {
+		font-size: 20px;
+		font-weight: 700;
+		margin: 0 0 12px;
+	}
+
+	.pillars__card p {
+		font-size: 14px;
+		line-height: 1.6;
+		color: var(--color-text-muted);
+		margin: 0;
+	}
+
+	@media (max-width: 900px) {
+		.pillars__grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>
