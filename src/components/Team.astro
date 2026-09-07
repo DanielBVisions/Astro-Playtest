@@ -1,29 +1,34 @@
 ---
 // Copy from Figma nodes 1502:8011/8020/8021/8070 (heading), 1502:8097-8108
-// (team cards), 1502:8109-8110 (wider team blurb + CTA card). The team
-// photo banner (Rectangle 682) and member headshots (Rectangles 677-680)
-// aren't reproduced — no photo assets were downloadable this session —
-// so they're placeholder blocks.
+// (team cards), 1502:8109-8110 (wider team blurb + CTA card). Photos are
+// the real exports from Daniel's About.zip: team-banner.png (Rectangle
+// 682) and team-*.png (Rectangles 677-680, matched to names by their x
+// position in Figma: 677→Jordan Blake, 678→Maya Chen, 679→Alex Rees,
+// 680→Sophie Moore).
 const team = [
 	{
 		name: 'Jordan Blake',
 		role: 'Founder',
 		bio: 'Exits. Scaling teams. Building platforms that drive real impact.',
+		photo: '/images/about/team-jordan-blake.png',
 	},
 	{
 		name: 'Maya Chen',
 		role: 'COO',
 		bio: 'Operations at scale. Turning complexity into performance.',
+		photo: '/images/about/team-maya-chen.png',
 	},
 	{
 		name: 'Alex Rees',
 		role: 'CTO',
 		bio: 'Platform architect. Data-driven products built for the future.',
+		photo: '/images/about/team-alex-rees.png',
 	},
 	{
 		name: 'Sophie Moore',
 		role: 'CPO',
 		bio: 'Creator-first products that solve real problems.',
+		photo: '/images/about/team-sophie-moore.png',
 	},
 ];
 ---
@@ -39,7 +44,7 @@ const team = [
 			</p>
 		</div>
 
-		<div class="team__banner" aria-hidden="true"></div>
+		<img class="team__banner" src="/images/about/team-banner.png" alt="The SHOUT team collaborating" />
 
 		<h3 class="team__subheading">Meet the team</h3>
 
@@ -47,7 +52,7 @@ const team = [
 			{
 				team.map((person) => (
 					<article class="team__card">
-						<div class="team__avatar" aria-hidden="true" />
+						<img class="team__avatar" src={person.photo} alt={person.name} />
 						<p class="team__role">{person.role}</p>
 						<p class="team__name">{person.name}</p>
 						<p class="team__bio">{person.bio}</p>
@@ -61,7 +66,13 @@ const team = [
 					day.
 				</p>
 				<div>
-					<p class="team__join-label">Want to join us?</p>
+					<p class="team__join-label">
+						Want to join us?
+						<svg width="14" height="14" viewBox="0 0 35 36" fill="none" aria-hidden="true">
+							<path d="M17 0V36" stroke="white" stroke-width="2" />
+							<path d="M35 18H0" stroke="white" stroke-width="2" />
+						</svg>
+					</p>
 					<a href="#" class="button button--white">Join our growing team</a>
 				</div>
 			</aside>
@@ -87,8 +98,8 @@ const team = [
 	.team__banner {
 		width: 100%;
 		aspect-ratio: 1312 / 588;
+		object-fit: cover;
 		border-radius: var(--radius-card);
-		background: linear-gradient(135deg, #2a2a2a, #050505);
 		margin-bottom: 56px;
 	}
 
@@ -106,14 +117,14 @@ const team = [
 	}
 
 	.team__card {
-		border-radius: var(--radius-card);
 		padding: 0;
 	}
 
 	.team__avatar {
 		aspect-ratio: 1;
+		width: 100%;
+		object-fit: cover;
 		border-radius: var(--radius-card);
-		background: linear-gradient(135deg, var(--color-purple), #1a1a1a);
 		margin-bottom: 16px;
 	}
 
@@ -162,6 +173,9 @@ const team = [
 		font-size: 15px;
 		font-weight: 700;
 		margin: 0 0 12px;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
 	}
 
 	@media (max-width: 900px) {

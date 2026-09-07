@@ -1,10 +1,8 @@
 ---
-// Copy verbatim from Figma nodes 1502:8008/8015/8025 (hero text) and
-// 1505:4422 "Group 73" (get_design_context — stat badges: 14M+ Content
-// Views, 450+ Creator Partnerships, 312% Increase in ROI). The collage
-// photos themselves aren't reproduced — no photo assets were downloadable
-// this session — so they're placeholder gradient blocks in roughly the
-// original composition.
+// Copy from Figma nodes 1502:8008/8015/8025. Collage photos and stat
+// badges are the real exported assets from Daniel's About.zip
+// (14 1.png, 113 1.png, 12 1.png → node names "14 1"/"113 1"/"12 1";
+// Group 70/71/69.png are the pre-composited stat cards).
 ---
 
 <section class="hero">
@@ -19,22 +17,13 @@
 		</div>
 
 		<div class="hero__collage" aria-hidden="true">
-			<div class="hero__photo hero__photo--a"></div>
-			<div class="hero__photo hero__photo--b"></div>
-			<div class="hero__photo hero__photo--c"></div>
+			<img class="hero__photo hero__photo--a" src="/images/about/hero-photo-1.png" alt="" />
+			<img class="hero__photo hero__photo--b" src="/images/about/hero-photo-2.png" alt="" />
+			<img class="hero__photo hero__photo--c" src="/images/about/hero-photo-3.png" alt="" />
 
-			<div class="hero__stat hero__stat--views">
-				<p class="hero__stat-number">14M+</p>
-				<p class="hero__stat-label">Content Views</p>
-			</div>
-			<div class="hero__stat hero__stat--partnerships">
-				<p class="hero__stat-number">450+</p>
-				<p class="hero__stat-label">Creator Partnerships</p>
-			</div>
-			<div class="hero__stat hero__stat--roi">
-				<p class="hero__stat-number">312%</p>
-				<p class="hero__stat-label">Increase in ROI</p>
-			</div>
+			<img class="hero__stat hero__stat--views" src="/images/about/stat-content-views.png" alt="14M+ Content Views" />
+			<img class="hero__stat hero__stat--partnerships" src="/images/about/stat-creator-partnerships.png" alt="450+ Creator Partnerships" />
+			<img class="hero__stat hero__stat--roi" src="/images/about/stat-roi.png" alt="312% Increase in ROI" />
 		</div>
 	</div>
 </section>
@@ -81,8 +70,7 @@
 	.hero__photo {
 		position: absolute;
 		border-radius: var(--radius-card);
-		background: linear-gradient(135deg, var(--color-purple), var(--color-pink));
-		opacity: 0.85;
+		object-fit: cover;
 	}
 
 	.hero__photo--a {
@@ -97,39 +85,20 @@
 		top: 0;
 		width: 41%;
 		height: 59%;
-		opacity: 0.65;
 	}
 
 	.hero__photo--c {
 		right: 15%;
 		bottom: 0;
-		width: 54%;
+		width: 44%;
 		height: 40%;
-		opacity: 0.5;
 	}
 
 	.hero__stat {
 		position: absolute;
-		background: var(--color-text-invert);
-		border-radius: var(--radius-card);
-		padding: 18px 20px;
-		box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
-	}
-
-	.hero__stat-number {
-		font-weight: 600;
-		font-size: var(--font-size-h4);
-		line-height: 0.9;
-		color: var(--color-purple);
-		margin: 0 0 4px;
-	}
-
-	.hero__stat-label {
-		font-weight: 600;
-		font-size: var(--font-size-p-sm);
-		color: var(--color-text-muted);
-		white-space: nowrap;
-		margin: 0;
+		width: 27%;
+		height: auto;
+		filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.12));
 	}
 
 	.hero__stat--views {
@@ -140,6 +109,7 @@
 	.hero__stat--partnerships {
 		bottom: 8%;
 		left: 40%;
+		width: 32%;
 	}
 
 	.hero__stat--roi {

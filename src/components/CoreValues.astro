@@ -2,9 +2,10 @@
 // Copy verbatim from Figma nodes 1502:8010/8019/8069 (heading) and the six
 // card nodes 1502:8026/8031/8036/8041/8046/8051 (get_design_context).
 // Three cards use a solid purple fill (#6508fb); the other three use a
-// photo background with a dark overlay for text contrast — no photo
-// assets were downloadable this session, so those use a placeholder
-// gradient instead, in the same grid position as the real design.
+// dark gradient photo background (value-card-bg.png, the real export for
+// node 1502:8041 "Frame 1948758621" / Performance Obsession). Only that
+// one card's background image was in Daniel's About.zip, so it's reused
+// for Move Fast and Global Mindset too — same treatment in the design.
 const values = [
 	{
 		title: 'Creator First',
@@ -123,8 +124,10 @@ const values = [
 
 	.values__card--photo {
 		background:
-			linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.75) 100%),
-			linear-gradient(135deg, #3a3a3a, #111111);
+			linear-gradient(180deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.55) 100%),
+			url('/images/about/value-card-bg.png');
+		background-size: cover;
+		background-position: center;
 	}
 
 	.values__card h3 {

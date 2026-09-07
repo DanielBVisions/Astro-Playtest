@@ -1,13 +1,12 @@
 ---
-// Copy verbatim from Figma node 1505:4423 (get_design_context).
-// The decorative ribbon/blob graphics either side (nodes 1502:6088,
-// 1502:7005) are vector art that wasn't reproduced — approximated here
-// with soft blurred gradient blobs.
+// Copy verbatim from Figma node 1505:4423. The ribbon graphic either side
+// (nodes 1502:6088 / 1502:7005) is the real exported asset (Group.png,
+// mirrored for the right side to match the two-frame layout in Figma).
 ---
 
 <section class="mission">
-	<div class="mission__blob mission__blob--left" aria-hidden="true"></div>
-	<div class="mission__blob mission__blob--right" aria-hidden="true"></div>
+	<img class="mission__ribbon mission__ribbon--left" src="/images/about/mission-ribbon.png" alt="" aria-hidden="true" />
+	<img class="mission__ribbon mission__ribbon--right" src="/images/about/mission-ribbon.png" alt="" aria-hidden="true" />
 
 	<div class="container mission__inner">
 		<h2>
@@ -58,25 +57,27 @@
 		margin: 0;
 	}
 
-	.mission__blob {
+	.mission__ribbon {
 		position: absolute;
-		width: 520px;
-		height: 520px;
-		border-radius: 50%;
-		filter: blur(90px);
-		opacity: 0.25;
+		width: 340px;
 		z-index: 0;
+		opacity: 0.9;
 	}
 
-	.mission__blob--left {
-		left: -220px;
-		top: -80px;
-		background: linear-gradient(135deg, var(--color-purple), var(--color-pink));
+	.mission__ribbon--left {
+		left: -140px;
+		top: -40px;
 	}
 
-	.mission__blob--right {
-		right: -220px;
-		bottom: -80px;
-		background: linear-gradient(135deg, var(--color-pink), var(--color-purple));
+	.mission__ribbon--right {
+		right: -140px;
+		bottom: -60px;
+		transform: scaleX(-1);
+	}
+
+	@media (max-width: 700px) {
+		.mission__ribbon {
+			width: 220px;
+		}
 	}
 </style>
