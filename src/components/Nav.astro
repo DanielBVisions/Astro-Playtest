@@ -1,28 +1,38 @@
 ---
-/* Placeholder nav — the frame includes a top bar (node 1502:7932) but its
-   link labels weren't readable from the metadata this session pulled. */
-const links = ['Home', 'About', 'Creators', 'Brands', 'Contact'];
+// Copy verbatim from Figma node 1502:7932 (get_design_context)
 ---
 
 <header class="nav">
 	<div class="container nav__inner">
-		<a href="/" class="nav__logo">SHOUT</a>
-		<nav>
-			<ul class="nav__links">
-				{links.map((label) => (
-					<li><a href="#">{label}</a></li>
-				))}
-			</ul>
-		</nav>
+		<div class="nav__left">
+			<a href="/" class="nav__logo">SHOUT</a>
+			<nav>
+				<ul class="nav__links">
+					<li class="nav__dropdown">
+						<a href="#">Platform</a>
+						<svg width="9" height="6" viewBox="0 0 9 6" fill="none" aria-hidden="true">
+							<path d="M1 1L4.5 5L8 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+						</svg>
+					</li>
+					<li><a href="#">Creators</a></li>
+					<li><a href="#">Pricing</a></li>
+				</ul>
+			</nav>
+		</div>
+		<div class="nav__right">
+			<a href="#" class="nav__login">Login</a>
+			<a href="#" class="button button--grey">Contact sales</a>
+			<a href="#" class="button button--black">Start for FREE</a>
+		</div>
 	</div>
 </header>
 
 <style>
 	.nav {
-		border-bottom: 1px solid var(--color-border);
+		border-bottom: 1px solid #eee;
 		position: sticky;
 		top: 0;
-		background: rgba(11, 11, 12, 0.85);
+		background: rgba(255, 255, 255, 0.92);
 		backdrop-filter: blur(8px);
 		z-index: 10;
 	}
@@ -31,38 +41,67 @@ const links = ['Home', 'About', 'Creators', 'Brands', 'Contact'];
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		height: 72px;
+		height: 88px;
+	}
+
+	.nav__left {
+		display: flex;
+		align-items: center;
+		gap: 64px;
 	}
 
 	.nav__logo {
 		font-weight: 800;
-		letter-spacing: 0.04em;
+		letter-spacing: -0.5px;
 		color: var(--color-text);
 		text-decoration: none;
-		font-size: 18px;
+		font-size: 24px;
 	}
 
 	.nav__links {
 		display: flex;
-		gap: 32px;
+		gap: 24px;
 		list-style: none;
 		margin: 0;
 		padding: 0;
 	}
 
 	.nav__links a {
-		color: var(--color-text-muted);
+		color: var(--color-text);
 		text-decoration: none;
-		font-size: 14px;
-		font-weight: 500;
+		font-size: 20px;
+		font-weight: 600;
 	}
 
-	.nav__links a:hover {
+	.nav__dropdown {
+		display: flex;
+		align-items: center;
+		gap: 8px;
 		color: var(--color-text);
 	}
 
-	@media (max-width: 640px) {
-		.nav__links {
+	.nav__right {
+		display: flex;
+		align-items: center;
+		gap: 16px;
+	}
+
+	.nav__login {
+		color: var(--color-text);
+		text-decoration: none;
+		font-size: 20px;
+		font-weight: 600;
+		padding: 8px;
+	}
+
+	.nav__right .button {
+		padding: 14px 16px;
+		font-size: 16px;
+	}
+
+	@media (max-width: 800px) {
+		.nav__links,
+		.nav__login {
 			display: none;
 		}
 	}

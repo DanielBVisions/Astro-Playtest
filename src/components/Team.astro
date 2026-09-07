@@ -1,6 +1,9 @@
 ---
-// Copy from Figma nodes 1502:8011, 1502:8020, 1502:8021, 1502:8070,
-// 1502:8097-8108 (team cards), 1502:8109-8110 (wider team + CTA).
+// Copy from Figma nodes 1502:8011/8020/8021/8070 (heading), 1502:8097-8108
+// (team cards), 1502:8109-8110 (wider team blurb + CTA card). The team
+// photo banner (Rectangle 682) and member headshots (Rectangles 677-680)
+// aren't reproduced — no photo assets were downloadable this session —
+// so they're placeholder blocks.
 const team = [
 	{
 		name: 'Jordan Blake',
@@ -27,38 +30,39 @@ const team = [
 
 <section class="team">
 	<div class="container">
-		<p class="eyebrow">Leadership team</p>
-		<h2>Built by operators. Backed by leaders.</h2>
-		<p class="team__lede">
-			We're a tight team of builders, creators, and operators who've scaled companies and
-			campaigns from the ground up.
-		</p>
+		<div class="team__heading">
+			<p class="eyebrow">Leadership team</p>
+			<h2 class="section-heading">Built by operators. <span class="team__accent">Backed by leaders.</span></h2>
+			<p class="section-lede">
+				We're a tight team of leaders, creators, and operators who've scaled companies and
+				campaigns from the ground up.
+			</p>
+		</div>
 
-		<div class="team__layout">
-			<div>
-				<h3 class="team__heading">Meet the team</h3>
-				<div class="team__grid">
-					{
-						team.map((person) => (
-							<article class="team__card">
-								<div class="team__avatar" aria-hidden="true" />
-								<p class="team__role">{person.role}</p>
-								<p class="team__name">{person.name}</p>
-								<p class="team__bio">{person.bio}</p>
-							</article>
-						))
-					}
-				</div>
-			</div>
+		<div class="team__banner" aria-hidden="true"></div>
 
-			<aside class="team__cta">
-				<p>
+		<h3 class="team__subheading">Meet the team</h3>
+
+		<div class="team__grid">
+			{
+				team.map((person) => (
+					<article class="team__card">
+						<div class="team__avatar" aria-hidden="true" />
+						<p class="team__role">{person.role}</p>
+						<p class="team__name">{person.name}</p>
+						<p class="team__bio">{person.bio}</p>
+					</article>
+				))
+			}
+
+			<aside class="team__join">
+				<p class="team__join-copy">
 					And a wider team of specialists, creators and operators working in the trenches every
 					day.
 				</p>
-				<div class="team__cta-footer">
-					<span>Want to join us?</span>
-					<a href="#" class="button">View open roles</a>
+				<div>
+					<p class="team__join-label">Want to join us?</p>
+					<a href="#" class="button button--white">Join our growing team</a>
 				</div>
 			</aside>
 		</div>
@@ -66,121 +70,101 @@ const team = [
 </section>
 
 <style>
-	h2 {
-		font-size: clamp(1.75rem, 3vw, 2.5rem);
-		font-weight: 800;
-		letter-spacing: -0.01em;
-		margin: 0 0 16px;
+	.team__heading {
+		text-align: center;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 16px;
+		margin: 0 auto 48px;
 		max-width: 640px;
 	}
 
-	.team__lede {
-		font-size: 16px;
-		color: var(--color-text-muted);
-		max-width: 560px;
-		margin: 0 0 56px;
+	.team__accent {
+		color: var(--color-purple);
 	}
 
-	.team__heading {
-		font-size: 22px;
+	.team__banner {
+		width: 100%;
+		aspect-ratio: 1312 / 588;
+		border-radius: var(--radius-card);
+		background: linear-gradient(135deg, #2a2a2a, #050505);
+		margin-bottom: 56px;
+	}
+
+	.team__subheading {
 		font-weight: 700;
+		font-size: var(--font-size-h3);
+		line-height: 0.9;
 		margin: 0 0 24px;
-	}
-
-	.team__layout {
-		display: grid;
-		grid-template-columns: 1fr 260px;
-		gap: 24px;
-		align-items: start;
 	}
 
 	.team__grid {
 		display: grid;
-		grid-template-columns: repeat(4, 1fr);
-		gap: 20px;
+		grid-template-columns: repeat(5, 1fr);
+		gap: 16px;
 	}
 
 	.team__card {
-		border: 1px solid var(--color-border);
-		border-radius: var(--radius-md);
-		padding: 16px;
+		border-radius: var(--radius-card);
+		padding: 0;
 	}
 
 	.team__avatar {
 		aspect-ratio: 1;
-		border-radius: var(--radius-md);
-		background: linear-gradient(135deg, var(--color-accent), var(--color-bg-raised));
+		border-radius: var(--radius-card);
+		background: linear-gradient(135deg, var(--color-purple), #1a1a1a);
 		margin-bottom: 16px;
 	}
 
 	.team__role {
-		font-size: 11px;
+		font-size: 12px;
 		font-weight: 700;
-		letter-spacing: 0.08em;
+		letter-spacing: 0.06em;
 		text-transform: uppercase;
-		color: var(--color-accent);
+		color: var(--color-purple);
 		margin: 0 0 6px;
 	}
 
 	.team__name {
-		font-size: 16px;
+		font-size: 20px;
 		font-weight: 700;
 		margin: 0 0 10px;
 	}
 
 	.team__bio {
-		font-size: 13px;
+		font-size: 14px;
+		font-weight: 500;
 		line-height: 1.5;
 		color: var(--color-text-muted);
 		margin: 0;
 	}
 
-	.team__cta {
-		border: 1px solid var(--color-border);
-		border-radius: var(--radius-md);
+	.team__join {
+		background: var(--color-purple);
+		border-radius: var(--radius-card);
 		padding: 20px;
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
-		height: 100%;
-		min-height: 220px;
+		color: var(--color-text-invert);
+		aspect-ratio: 1;
 	}
 
-	.team__cta p {
+	.team__join-copy {
 		font-size: 14px;
+		font-weight: 500;
 		line-height: 1.5;
-		color: var(--color-text-muted);
 		margin: 0;
 	}
 
-	.team__cta-footer {
-		display: flex;
-		flex-direction: column;
-		gap: 12px;
-	}
-
-	.team__cta-footer span {
-		font-size: 14px;
-		font-weight: 600;
-	}
-
-	.button {
-		display: inline-block;
-		text-align: center;
-		background: var(--color-accent);
-		color: var(--color-accent-text);
+	.team__join-label {
+		font-size: 15px;
 		font-weight: 700;
-		font-size: 14px;
-		text-decoration: none;
-		border-radius: var(--radius-full);
-		padding: 14px 20px;
+		margin: 0 0 12px;
 	}
 
 	@media (max-width: 900px) {
-		.team__layout {
-			grid-template-columns: 1fr;
-		}
-
 		.team__grid {
 			grid-template-columns: 1fr 1fr;
 		}

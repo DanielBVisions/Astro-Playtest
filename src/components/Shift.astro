@@ -1,49 +1,52 @@
 ---
-// Copy from Figma nodes 1502:8009, 1502:8018, 1502:8068, plus the numbered
-// step labels/headings/bodies (1502:8012-14, 1502:8022-24, 1502:8056-61).
-// The exact left/right pairing of "THE OLD WAY" / "THE PROBLEM" / "THE SHIFT"
-// couldn't be confirmed from layout coordinates alone (Figma disconnected
-// before a full design-context read) — ordered here as a logical progression.
+// Copy and layout confirmed from Figma nodes 1502:8009/8018/8068 (section
+// heading), 1502:8012-14 (row labels), 1502:8022-24 (numerals, 100px
+// Darker Grotesque Bold, solid purple — node 1502:8022 fetched directly),
+// 1502:8056-8061 (row headings/bodies). Row x-coordinates confirm the
+// alternating left/right layout: row 1 and 3 content sit right of the
+// centre line (numeral left), row 2 sits left (numeral right).
 const steps = [
 	{
 		number: '01',
 		label: 'The old way',
 		title: 'Built on vanity. Blind to impact.',
 		body: 'Follower counts. Outdated benchmarks. Manual processes. Zero visibility.',
+		side: 'right',
 	},
 	{
 		number: '02',
 		label: 'The problem',
 		title: 'Waste. Missed matches. No clarity.',
 		body: 'Brands overpay. Creators get overlooked. Everyone loses.',
+		side: 'left',
 	},
 	{
 		number: '03',
 		label: 'The shift',
 		title: 'Data-powered. Creator-led. Outcome obsessed.',
 		body: 'Smart matching. Real-time insights. Proven results at scale.',
+		side: 'right',
 	},
 ];
 ---
 
 <section class="shift">
 	<div class="container">
-		<p class="eyebrow">The shift</p>
-		<h2>From guesswork to guaranteed growth.</h2>
-		<p class="shift__lede">We didn't tweak the old system. We built a new one.</p>
+		<div class="shift__heading">
+			<p class="eyebrow">The shift</p>
+			<h2 class="section-heading">From guesswork to <span class="shift__accent">guaranteed growth.</span></h2>
+			<p class="section-lede">We didn't tweak the old system. We built a new one.</p>
+		</div>
 
-		<ol class="shift__steps">
+		<ol class="shift__timeline">
 			{
 				steps.map((step) => (
-					<li class="shift__step">
-						<div class="shift__marker">
-							<span class="shift__number">{step.number}</span>
-							<span class="shift__dot" aria-hidden="true" />
-						</div>
+					<li class={`shift__row shift__row--${step.side}`}>
+						<span class="shift__number">{step.number}</span>
 						<div class="shift__content">
 							<p class="shift__label">{step.label}</p>
 							<h3>{step.title}</h3>
-							<p>{step.body}</p>
+							<p class="shift__body">{step.body}</p>
 						</div>
 					</li>
 				))
@@ -53,87 +56,120 @@ const steps = [
 </section>
 
 <style>
-	h2 {
-		font-size: clamp(1.75rem, 3vw, 2.5rem);
-		font-weight: 800;
-		letter-spacing: -0.01em;
-		margin: 0 0 16px;
+	.shift__heading {
+		text-align: center;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 16px;
+		margin: 0 auto 64px;
 		max-width: 640px;
 	}
 
-	.shift__lede {
-		font-size: 16px;
-		color: var(--color-text-muted);
-		max-width: 560px;
-		margin: 0 0 56px;
+	.shift__accent {
+		color: var(--color-purple);
 	}
 
-	.shift__steps {
+	.shift__timeline {
 		list-style: none;
 		margin: 0;
 		padding: 0;
-		border-left: 1px solid var(--color-border);
-		max-width: 640px;
-	}
-
-	.shift__step {
-		display: flex;
-		gap: 24px;
-		padding-bottom: 48px;
+		max-width: 900px;
+		margin-inline: auto;
 		position: relative;
 	}
 
-	.shift__step:last-child {
-		padding-bottom: 0;
+	.shift__timeline::before {
+		content: '';
+		position: absolute;
+		left: 50%;
+		top: 0;
+		bottom: 0;
+		width: 1px;
+		background: #e5e5e5;
+		transform: translateX(-50%);
 	}
 
-	.shift__marker {
-		display: flex;
-		align-items: flex-start;
-		gap: 12px;
-		margin-left: -1px;
+	.shift__row {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		align-items: center;
+		gap: 40px;
+		padding-block: 32px;
 	}
 
 	.shift__number {
-		font-size: 14px;
 		font-weight: 700;
-		color: var(--color-text-muted);
-		width: 28px;
-		flex-shrink: 0;
+		font-size: clamp(3rem, 8vw, var(--font-size-display));
+		line-height: 0.8;
+		letter-spacing: -1px;
+		color: var(--color-purple);
 	}
 
-	.shift__dot {
-		width: 14px;
-		height: 14px;
-		border-radius: 50%;
-		background: var(--color-accent);
-		flex-shrink: 0;
-		margin-top: 2px;
+	.shift__row--right .shift__number {
+		text-align: right;
+		grid-column: 1;
 	}
 
-	.shift__content {
-		padding-left: 8px;
+	.shift__row--right .shift__content {
+		grid-column: 2;
+		text-align: left;
+	}
+
+	.shift__row--left .shift__content {
+		grid-column: 1;
+		text-align: right;
+	}
+
+	.shift__row--left .shift__number {
+		grid-column: 2;
+		text-align: left;
 	}
 
 	.shift__label {
-		font-size: 12px;
-		font-weight: 700;
-		letter-spacing: 0.08em;
-		text-transform: uppercase;
-		color: var(--color-accent);
+		font-weight: 600;
+		font-size: var(--font-size-p-md);
+		color: var(--color-purple);
 		margin: 0 0 8px;
 	}
 
 	.shift__content h3 {
-		font-size: 18px;
 		font-weight: 700;
+		font-size: 22px;
 		margin: 0 0 8px;
 	}
 
-	.shift__content p {
-		font-size: 14px;
+	.shift__body {
+		font-size: 15px;
+		font-weight: 500;
 		line-height: 1.6;
 		color: var(--color-text-muted);
 		margin: 0;
+	}
+
+	@media (max-width: 700px) {
+		.shift__timeline::before {
+			left: 4px;
+		}
+
+		.shift__row,
+		.shift__row--right,
+		.shift__row--left {
+			grid-template-columns: 40px 1fr;
+			gap: 16px;
+		}
+
+		.shift__row--right .shift__number,
+		.shift__row--left .shift__number {
+			grid-column: 1;
+			text-align: left;
+			font-size: 2rem;
+		}
+
+		.shift__row--right .shift__content,
+		.shift__row--left .shift__content {
+			grid-column: 2;
+			text-align: left;
+		}
 	}
 </style>

@@ -14,30 +14,29 @@ npm run dev
 
 Then open http://localhost:4321/about
 
+## Sourced from Figma
+
+Colors, type (Darker Grotesque), copy, and layout for every section — nav,
+hero + stat badges, mission statement, three pillars, "the shift" timeline,
+all six core values cards, leadership team, join CTA, and footer — were
+pulled directly from Figma via `get_variable_defs` and `get_design_context`
+on the relevant nodes. Component files note the source node IDs in their
+top comment.
+
 ## Known gaps vs. the Figma frame
 
-The Figma MCP connection dropped mid-session before every detail could be
-read, so a few things here are placeholders rather than pulled from the
-design:
+No photo or icon assets were downloadable this session (this environment's
+network policy blocks fetches to figma.com), so anywhere the design uses a
+real photo, those are placeholder gradient blocks:
 
-- **Colors, type scale, spacing** — no design tokens were fetched
-  (`get_variable_defs` / `get_design_context` didn't run). Currently a
-  dark theme with a lime accent, defined in `src/layouts/Layout.astro`.
-- **Core Values cards** (6 cards in the "Core values" section) — the
-  individual card titles/descriptions sit deeper in the Figma node tree
-  than this session's read reached. Placeholder copy lives in
-  `src/components/CoreValues.astro`.
-- **Footer** — the frame's footer is a shared Figma symbol whose content
-  wasn't read. `src/components/Footer.astro` is a generic placeholder.
-- **Top nav** — link labels weren't confirmed. `src/components/Nav.astro`
-  is a placeholder.
-- **"The Shift" step ordering** — the three-step timeline's exact
-  before/after pairing couldn't be confirmed from coordinates alone;
-  ordered as a logical narrative in `src/components/Shift.astro`.
+- Hero image collage (real stat numbers/labels are accurate; the photos
+  behind them are not)
+- The three "photo" core values cards (Performance Obsession, Move Fast,
+  Global Mindset)
+- Leadership team photo banner and the 4 member headshots
+- Join CTA section background photo
 
-All hero, pillars, "the shift" headings/body copy, core values section
-copy, and leadership team bios/names are pulled verbatim from the Figma
-text nodes.
-
-Once Figma is reconnected, re-run the frame read and update the flagged
-components above.
+Everything else — text, colors, spacing, the zigzag layout of "The Shift",
+the purple/photo checkerboard pattern in Core Values — matches the Figma
+source. Once Figma access is available again, swap in the real images via
+the Figma MCP's asset download.

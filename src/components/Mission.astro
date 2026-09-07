@@ -1,0 +1,82 @@
+---
+// Copy verbatim from Figma node 1505:4423 (get_design_context).
+// The decorative ribbon/blob graphics either side (nodes 1502:6088,
+// 1502:7005) are vector art that wasn't reproduced — approximated here
+// with soft blurred gradient blobs.
+---
+
+<section class="mission">
+	<div class="mission__blob mission__blob--left" aria-hidden="true"></div>
+	<div class="mission__blob mission__blob--right" aria-hidden="true"></div>
+
+	<div class="container mission__inner">
+		<h2>
+			Creator marketing<br />
+			is broken. <span class="mission__accent">We&rsquo;re here to fix it.</span>
+		</h2>
+		<p class="mission__lede">
+			Our mission is to replace vanity metrics, bloated processes and guesswork with a smarter
+			model — connecting the right creators with the right brands and turning authentic content
+			into measurable growth.
+		</p>
+	</div>
+</section>
+
+<style>
+	.mission {
+		position: relative;
+		overflow: hidden;
+		text-align: center;
+	}
+
+	.mission__inner {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 40px;
+	}
+
+	h2 {
+		font-weight: 700;
+		font-size: clamp(2.5rem, 7vw, var(--font-size-display));
+		line-height: 0.8;
+		letter-spacing: -1px;
+		max-width: 900px;
+	}
+
+	.mission__accent {
+		color: var(--color-purple);
+	}
+
+	.mission__lede {
+		font-weight: 600;
+		font-size: var(--font-size-h5);
+		line-height: 1.4;
+		color: var(--color-text-muted);
+		max-width: 710px;
+		margin: 0;
+	}
+
+	.mission__blob {
+		position: absolute;
+		width: 520px;
+		height: 520px;
+		border-radius: 50%;
+		filter: blur(90px);
+		opacity: 0.25;
+		z-index: 0;
+	}
+
+	.mission__blob--left {
+		left: -220px;
+		top: -80px;
+		background: linear-gradient(135deg, var(--color-purple), var(--color-pink));
+	}
+
+	.mission__blob--right {
+		right: -220px;
+		bottom: -80px;
+		background: linear-gradient(135deg, var(--color-pink), var(--color-purple));
+	}
+</style>

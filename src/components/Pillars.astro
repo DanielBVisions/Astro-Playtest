@@ -1,15 +1,20 @@
 ---
-// Copy from Figma nodes 1502:8016, 1502:8067, 1502:8062-64, 1502:8071-73
+// Copy from Figma nodes 1502:8016, 1502:8067, 1502:8062-64, 1502:8071-73.
+// Icon glyphs (bolt/bar-chart/heart, nodes 1502:8074/8082/8077) matched
+// by semantic meaning with inline SVGs rather than the exact vector paths.
 const pillars = [
 	{
+		icon: 'bolt',
 		title: 'Real creators. Real impact.',
 		body: 'We champion authentic creators who drive real influence-not just inflated numbers. Quality over quantity, always.',
 	},
 	{
+		icon: 'chart',
 		title: 'Performance at scale.',
 		body: 'Our platform combines data, automation and human expertise to run creator campaigns that deliver measurable business results.',
 	},
 	{
+		icon: 'heart',
 		title: 'Culture first. Always.',
 		body: 'We stay close to internet culture so our campaigns feel native, not forced. Built with creators, for creators.',
 	},
@@ -18,16 +23,40 @@ const pillars = [
 
 <section class="pillars">
 	<div class="container">
-		<h2>Our ethos. Built on three pillars.</h2>
-		<p class="pillars__lede">
-			SHOUT was built to bridge the gap between enterprise performance and the creator economy.
-			This is how we do it.
-		</p>
+		<div class="pillars__heading">
+			<h2 class="section-heading">Our ethos. <span class="pillars__accent">Built on three pillars.</span></h2>
+			<p class="section-lede">
+				SHOUT was built to bridge the gap between enterprise performance and the creator economy.
+				This is how we do it.
+			</p>
+		</div>
 
 		<div class="pillars__grid">
 			{
 				pillars.map((pillar) => (
 					<article class="pillars__card">
+						<span class="pillars__icon">
+							{pillar.icon === 'bolt' && (
+								<svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+									<path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z" fill="white" />
+								</svg>
+							)}
+							{pillar.icon === 'chart' && (
+								<svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+									<rect x="4" y="12" width="4" height="8" rx="1" fill="white" />
+									<rect x="10" y="7" width="4" height="13" rx="1" fill="white" />
+									<rect x="16" y="3" width="4" height="17" rx="1" fill="white" />
+								</svg>
+							)}
+							{pillar.icon === 'heart' && (
+								<svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+									<path
+										d="M12 21s-7.5-4.6-10-9.1C.4 8.6 2 5 5.6 5c2 0 3.4 1 4.4 2.4C11 6 12.4 5 14.4 5 18 5 19.6 8.6 22 11.9 19.5 16.4 12 21 12 21Z"
+										fill="white"
+									/>
+								</svg>
+							)}
+						</span>
 						<h3>{pillar.title}</h3>
 						<p>{pillar.body}</p>
 					</article>
@@ -38,23 +67,18 @@ const pillars = [
 </section>
 
 <style>
-	.pillars {
-		background: var(--color-bg-raised);
-	}
-
-	h2 {
-		font-size: clamp(1.75rem, 3vw, 2.5rem);
-		font-weight: 800;
-		letter-spacing: -0.01em;
-		margin: 0 0 16px;
+	.pillars__heading {
+		text-align: center;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 16px;
+		margin: 0 auto 56px;
 		max-width: 640px;
 	}
 
-	.pillars__lede {
-		font-size: 16px;
-		color: var(--color-text-muted);
-		max-width: 560px;
-		margin: 0 0 56px;
+	.pillars__accent {
+		color: var(--color-purple);
 	}
 
 	.pillars__grid {
@@ -64,20 +88,35 @@ const pillars = [
 	}
 
 	.pillars__card {
-		background: var(--color-bg);
-		border: 1px solid var(--color-border);
-		border-radius: var(--radius-lg);
-		padding: 32px;
+		background: var(--color-surface);
+		border-radius: var(--radius-card);
+		padding: 40px 32px;
+		text-align: center;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.pillars__icon {
+		width: 64px;
+		height: 64px;
+		border-radius: 50%;
+		background: var(--color-purple);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin-bottom: 24px;
 	}
 
 	.pillars__card h3 {
-		font-size: 20px;
 		font-weight: 700;
+		font-size: 22px;
 		margin: 0 0 12px;
 	}
 
 	.pillars__card p {
-		font-size: 14px;
+		font-size: 15px;
+		font-weight: 500;
 		line-height: 1.6;
 		color: var(--color-text-muted);
 		margin: 0;
