@@ -44,17 +44,32 @@ const steps = [
 			</div>
 			<ol class="shift__timeline">
 				{
-					steps.map((step) => (
-						<li class={`shift__row shift__row--${step.side}`}>
-							<span class="shift__dot" aria-hidden="true"></span>
-							<span class="shift__number">{step.number}</span>
+					steps.map((step) => {
+						const number = <span class="shift__number">{step.number}</span>;
+						const content = (
 							<div class="shift__content">
 								<p class="shift__label">{step.label}</p>
 								<h3>{step.title}</h3>
 								<p class="shift__body">{step.body}</p>
 							</div>
-						</li>
-					))
+						);
+						return (
+							<li class={`shift__row shift__row--${step.side}`}>
+								<span class="shift__dot" aria-hidden="true"></span>
+								{step.side === 'left' ? (
+									<>
+										{content}
+										{number}
+									</>
+								) : (
+									<>
+										{number}
+										{content}
+									</>
+								)}
+							</li>
+						);
+					})
 				}
 			</ol>
 		</div>
@@ -150,23 +165,24 @@ const steps = [
 		color: var(--color-purple);
 	}
 
+	/* No grid-column overrides: the markup itself puts content before the
+	   number for "left" rows and after it for "right" rows, so column
+	   placement just follows natural DOM order — grid-column swapping
+	   here was the suspected cause of row 2 (side: left) rendering its
+	   content well below the numeral instead of alongside it. */
 	.shift__row--right .shift__number {
 		text-align: right;
-		grid-column: 1;
 	}
 
 	.shift__row--right .shift__content {
-		grid-column: 2;
 		text-align: left;
 	}
 
 	.shift__row--left .shift__content {
-		grid-column: 1;
 		text-align: right;
 	}
 
 	.shift__row--left .shift__number {
-		grid-column: 2;
 		text-align: left;
 	}
 
@@ -200,23 +216,23 @@ const steps = [
 			left: 4px;
 		}
 
-		.shift__row,
-		.shift__row--right,
-		.shift__row--left {
+		.shift__row {
 			grid-template-columns: 40px 1fr;
 			gap: 16px;
 		}
 
-		.shift__row--right .shift__number,
-		.shift__row--left .shift__number {
-			grid-column: 1;
+		/* Mobile always shows number-then-content left to right, regardless
+		   of the left/right DOM order used for desktop's alternating
+		   layout — order overrides that without needing grid-column. */
+		.shift__number {
+			order: 1;
 			text-align: left;
 			font-size: 2rem;
 		}
 
 		.shift__row--right .shift__content,
 		.shift__row--left .shift__content {
-			grid-column: 2;
+			order: 2;
 			text-align: left;
 		}
 	}

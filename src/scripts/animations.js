@@ -84,9 +84,10 @@ function initCardReveals() {
 
 // "The shift" timeline: the centre line fills as the section scrolls
 // through view (scrubbed, tied directly to scroll position). The first
-// row starts highlighted (it's the current/active step by default); each
-// later row lights up permanently — once, not toggled back and forth —
-// the first time it's scrolled to, like steps being checked off.
+// row starts highlighted (it's the current/active step by default).
+// Scrolling down past a row does NOT dim it back out — once reached, it
+// stays lit, like a step being checked off — but scrolling back up past
+// it does dim it again, since you've un-reached it.
 function initTimelineScroll() {
 	const wrap = document.querySelector('.shift__timeline-wrap');
 	if (!wrap) return;
@@ -106,17 +107,16 @@ function initTimelineScroll() {
 	}
 
 	wrap.querySelectorAll('.shift__row').forEach((row, index) => {
-		if (index === 0) {
-			gsap.set(row, { opacity: 1 });
-			return;
-		}
+		gsap.set(row, { opacity: index === 0 ? 1 : 0.4 });
 
-		gsap.set(row, { opacity: 0.4 });
 		ScrollTrigger.create({
 			trigger: row,
 			start: 'top center',
-			once: true,
-			onEnter: () => gsap.to(row, { opacity: 1, duration: 0.3 }),
+			end: 'bottom center',
+			onEnter: () => gsap.to(row, { opacity: 1, duration: 0.3, overwrite: true }),
+			onEnterBack: () => gsap.to(row, { opacity: 1, duration: 0.3, overwrite: true }),
+			onLeaveBack: () => gsap.to(row, { opacity: 0.4, duration: 0.3, overwrite: true }),
+			// no onLeave — scrolling past a row going down leaves it lit
 		});
 	});
 }
