@@ -171,21 +171,19 @@ const { title, description = 'SHOUT is the Creator Performance Platform built to
 	}
 
 	/* Word-stagger heading reveal (src/scripts/animations.js wraps each
-	   word in these on load, then animates .word-inner up into view). */
+	   word in one of these on load, then animates it up + fades it in).
+	   No overflow:hidden here — at this heading font's tight line-height
+	   (0.8), clipping each word's box cropped ascenders/descenders even
+	   at rest, not just mid-animation. */
 	.word {
 		display: inline-block;
-		overflow: hidden;
-		vertical-align: top;
-	}
-
-	.word-inner {
-		display: inline-block;
-		will-change: transform;
+		will-change: transform, opacity;
 	}
 
 	@media (prefers-reduced-motion: reduce) {
-		.word-inner {
+		.word {
 			transform: none !important;
+			opacity: 1 !important;
 		}
 	}
 

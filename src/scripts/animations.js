@@ -5,9 +5,12 @@ gsap.registerPlugin(ScrollTrigger);
 
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-// Wraps every word of a heading in <span class="word"><span class="word-inner">word</span></span>
-// so each word can slide up independently, while leaving existing markup
-// (accent color spans, <br>) untouched — text nodes are the only thing split.
+// Wraps every word of a heading in <span class="word">word</span> so each
+// word can move up + fade in independently, while leaving existing markup
+// (accent color spans, <br>) untouched — text nodes are the only thing
+// split. No overflow:hidden wrapper here: at this heading font's tight
+// line-height (0.8), clipping each word's box cropped ascenders and
+// descenders even at rest, not just mid-animation.
 function wrapWords(root) {
 	const walk = (node) => {
 		Array.from(node.childNodes).forEach((child) => {
@@ -20,13 +23,10 @@ function wrapWords(root) {
 						frag.appendChild(document.createTextNode(part));
 						return;
 					}
-					const outer = document.createElement('span');
-					outer.className = 'word';
-					const inner = document.createElement('span');
-					inner.className = 'word-inner';
-					inner.textContent = part;
-					outer.appendChild(inner);
-					frag.appendChild(outer);
+					const word = document.createElement('span');
+					word.className = 'word';
+					word.textContent = part;
+					frag.appendChild(word);
 				});
 				node.replaceChild(frag, child);
 			} else if (child.nodeType === Node.ELEMENT_NODE) {
@@ -40,12 +40,13 @@ function wrapWords(root) {
 function initHeadingReveals() {
 	document.querySelectorAll('.section-heading').forEach((heading) => {
 		wrapWords(heading);
-		const words = heading.querySelectorAll('.word-inner');
+		const words = heading.querySelectorAll('.word');
 		if (!words.length) return;
 
-		gsap.set(words, { yPercent: 110 });
+		gsap.set(words, { y: 28, opacity: 0 });
 		gsap.to(words, {
-			yPercent: 0,
+			y: 0,
+			opacity: 1,
 			duration: 0.7,
 			ease: 'power3.out',
 			stagger: 0.035,
