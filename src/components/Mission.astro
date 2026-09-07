@@ -1,7 +1,11 @@
 ---
-// Copy verbatim from Figma node 1505:4423. The ribbon graphic either side
-// (nodes 1502:6088 / 1502:7005) is the real exported asset (Group.png,
-// mirrored for the right side to match the two-frame layout in Figma).
+// Copy verbatim from Figma node 1505:4423. Heading now uses the shared
+// .section-heading style (confirmed 100px Bold Darker Grotesque via
+// get_design_context on sibling heading nodes 1502:8016/8019 — every
+// section heading on this page uses the same size, this one included).
+// The ribbon graphic either side (nodes 1502:6088 / 1502:7005) is the
+// real exported asset (Group.png, mirrored for the right side to match
+// the two-frame layout in Figma).
 ---
 
 <section class="mission">
@@ -9,7 +13,7 @@
 	<img class="mission__ribbon mission__ribbon--right" src="/images/about/mission-ribbon.png" alt="" aria-hidden="true" />
 
 	<div class="container mission__inner">
-		<h2>
+		<h2 class="section-heading mission__heading">
 			Creator marketing<br />
 			is broken. <span class="mission__accent">We&rsquo;re here to fix it.</span>
 		</h2>
@@ -36,12 +40,9 @@
 		gap: 40px;
 	}
 
-	h2 {
-		font-weight: 700;
-		font-size: clamp(2.5rem, 7vw, var(--font-size-display));
-		line-height: 0.8;
-		letter-spacing: -1px;
+	.mission__heading {
 		max-width: 900px;
+		margin-bottom: 0;
 	}
 
 	.mission__accent {

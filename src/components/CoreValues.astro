@@ -1,11 +1,15 @@
 ---
 // Copy verbatim from Figma nodes 1502:8010/8019/8069 (heading) and the six
 // card nodes 1502:8026/8031/8036/8041/8046/8051 (get_design_context).
-// Three cards use a solid purple fill (#6508fb); the other three use a
-// dark gradient photo background (value-card-bg.png, the real export for
-// node 1502:8041 "Frame 1948758621" / Performance Obsession). Only that
-// one card's background image was in Daniel's About.zip, so it's reused
-// for Move Fast and Global Mindset too — same treatment in the design.
+// Section background is white/default, NOT black — confirmed via
+// get_design_context on 1502:8019 (heading uses text/primary = black)
+// and 1502:8069 (lede uses text/secondary = #666), both of which only
+// make sense on a light background. The black/dark look in the design
+// comes entirely from the cards themselves: three solid purple
+// (#6508fb), three a dark gradient photo (value-card-bg.png, the real
+// export for node 1502:8041 "Frame 1948758621" / Performance Obsession,
+// reused for Move Fast and Global Mindset since only one photo card was
+// in Daniel's About.zip).
 const values = [
 	{
 		title: 'Creator First',
@@ -75,11 +79,6 @@ const values = [
 </section>
 
 <style>
-	.values {
-		background: var(--color-black);
-		color: var(--color-text-invert);
-	}
-
 	.values__heading {
 		text-align: center;
 		display: flex;
@@ -90,16 +89,8 @@ const values = [
 		max-width: 640px;
 	}
 
-	.values .section-heading {
-		color: var(--color-text-invert);
-	}
-
 	.values__accent {
 		color: var(--color-purple);
-	}
-
-	.values .section-lede {
-		color: var(--color-text-invert-muted);
 	}
 
 	.values__grid {

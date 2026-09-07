@@ -106,9 +106,14 @@ const { title, description = 'SHOUT is the Creator Performance Platform built to
 		margin: 0 0 8px;
 	}
 
+	/*
+	  Confirmed via get_design_context on nodes 1502:8016/8019 (and by the
+	  identical 862x136 bounding box shared by all four section headings
+	  in the metadata): these are font-size/display (100px) Bold, not h3.
+	*/
 	.section-heading {
-		font-weight: 600;
-		font-size: var(--font-size-h3);
+		font-weight: 700;
+		font-size: clamp(2.75rem, 6.5vw, var(--font-size-display));
 		line-height: 0.8;
 		letter-spacing: -1px;
 		margin: 0 0 16px;

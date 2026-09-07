@@ -1,16 +1,24 @@
 ---
-// Copy from Figma nodes 1502:8008/8015/8025. Collage layout uses the exact
+// Copy from Figma nodes 1502:8008/8015/8025. H1 uses the shared
+// .section-heading style — confirmed 100px Bold Darker Grotesque via
+// get_design_context on 1502:8015 itself, same token every other
+// section heading on the page uses. Collage layout uses the exact
 // left/top/width/height values from get_design_context on node 1505:4422
-// "Group 73" (percentages there are relative to its own 646x561 box —
-// converted here to % of that box for a fluid container). Photos and stat
-// badges are the real exported assets from Daniel's About.zip.
+// "Group 73" — its calc(N% + Xpx) values are relative to the full 1440px
+// canvas (verified: 14 1's calc(50%+10px) = 730 = Group 73's own canvas
+// x), not its own 646px box as first assumed. Converted to canvas
+// coordinates, then to local coordinates within Group 73 (subtracting its
+// own x730/y178 origin), everything fits exactly inside the 646x561 box —
+// two elements land flush on its right/bottom edges. Below are those
+// local values as % of 646x561. Photos and stat badges are the real
+// exported assets from Daniel's About.zip.
 ---
 
 <section class="hero">
 	<div class="container hero__grid">
 		<div class="hero__copy">
 			<p class="eyebrow">About</p>
-			<h1>Built for <span class="hero__accent">creators.</span><br />Built to <span class="hero__accent">perform.</span></h1>
+			<h1 class="section-heading">Built for <span class="hero__accent">creators.</span><br />Built to <span class="hero__accent">perform.</span></h1>
 			<p class="hero__lede">
 				SHOUT is the Creator Performance Platform built to change how brands and creators work
 				together.
@@ -32,7 +40,7 @@
 <style>
 	.hero {
 		padding-top: 64px;
-		padding-bottom: 120px;
+		padding-bottom: 64px;
 	}
 
 	.hero__grid {
@@ -42,12 +50,9 @@
 		align-items: center;
 	}
 
-	h1 {
-		font-weight: 700;
-		font-size: clamp(2.5rem, 5vw, var(--font-size-h1));
-		line-height: 0.9;
-		letter-spacing: -1px;
-		margin: 0 0 24px;
+	.hero__copy h1 {
+		text-align: left;
+		margin-bottom: 24px;
 	}
 
 	.hero__accent {
@@ -63,16 +68,9 @@
 		margin: 0;
 	}
 
-	/*
-	  646x561 reference box (Group 73's own bounding box). Children are
-	  positioned as % of that box, matching Figma's local left/top/width/
-	  height exactly, so some legitimately bleed past 100% — that's the
-	  real design, not a bug, so no overflow:hidden here.
-	*/
 	.hero__collage {
 		position: relative;
 		aspect-ratio: 646 / 561;
-		margin-bottom: 60px;
 	}
 
 	.hero__photo {
@@ -82,22 +80,22 @@
 	}
 
 	.hero__photo--a {
-		left: 51.5%;
-		top: 34.9%;
+		left: 0%;
+		top: 3.2%;
 		width: 64.1%;
 		height: 59.2%;
 	}
 
 	.hero__photo--b {
-		left: 60.5%;
-		top: 90.2%;
+		left: 19.2%;
+		top: 58.5%;
 		width: 53.6%;
 		height: 41.5%;
 	}
 
 	.hero__photo--c {
-		left: 79.7%;
-		top: 43.9%;
+		left: 58.8%;
+		top: 12.1%;
 		width: 41.2%;
 		height: 59.2%;
 	}
@@ -109,20 +107,20 @@
 	}
 
 	.hero__stat--views {
-		left: 74.3%;
-		top: 31.7%;
+		left: 53.4%;
+		top: 0%;
 		width: 19.3%;
 	}
 
 	.hero__stat--partnerships {
-		left: 57%;
-		top: 90.2%;
+		left: 5.4%;
+		top: 58.5%;
 		width: 26.3%;
 	}
 
 	.hero__stat--roi {
-		left: 79.4%;
-		top: 95.2%;
+		left: 68.7%;
+		top: 63.5%;
 		width: 19.3%;
 	}
 
