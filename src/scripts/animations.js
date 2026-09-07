@@ -107,7 +107,8 @@ function initTimelineScroll() {
 	}
 
 	wrap.querySelectorAll('.shift__row').forEach((row, index) => {
-		gsap.set(row, { opacity: index === 0 ? 1 : 0.4 });
+		const isFirst = index === 0;
+		gsap.set(row, { opacity: isFirst ? 1 : 0.4 });
 
 		ScrollTrigger.create({
 			trigger: row,
@@ -115,8 +116,13 @@ function initTimelineScroll() {
 			end: 'bottom center',
 			onEnter: () => gsap.to(row, { opacity: 1, duration: 0.3, overwrite: true }),
 			onEnterBack: () => gsap.to(row, { opacity: 1, duration: 0.3, overwrite: true }),
-			onLeaveBack: () => gsap.to(row, { opacity: 0.4, duration: 0.3, overwrite: true }),
-			// no onLeave — scrolling past a row going down leaves it lit
+			// Row 1 has nothing "before" it to scroll back past — it's the
+			// default/current step until you scroll further, so it never
+			// dims. On page load (scrolled to top, this trigger hasn't
+			// been reached yet) GSAP's initial refresh treated that as
+			// "before start" and fired this immediately, undoing the
+			// opacity:1 set above — that was the actual bug here.
+			onLeaveBack: isFirst ? undefined : () => gsap.to(row, { opacity: 0.4, duration: 0.3, overwrite: true }),
 		});
 	});
 }
