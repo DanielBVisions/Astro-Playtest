@@ -1,4 +1,9 @@
 ---
+import { Image } from 'astro:assets';
+import heroPhoto1 from '../assets/about/hero-photo-1.png';
+import heroPhoto2 from '../assets/about/hero-photo-2.png';
+import heroPhoto3 from '../assets/about/hero-photo-3.png';
+
 // Copy from Figma nodes 1502:8008/8015/8025. H1 uses the shared
 // .section-heading style — confirmed 100px Bold Darker Grotesque via
 // get_design_context on 1502:8015 itself, same token every other
@@ -26,13 +31,13 @@
 		</div>
 
 		<div class="hero__collage" aria-hidden="true">
-			<img class="hero__photo hero__photo--a" src="/images/about/hero-photo-1.png" alt="" />
-			<img class="hero__photo hero__photo--b" src="/images/about/hero-photo-2.png" alt="" />
-			<img class="hero__photo hero__photo--c" src="/images/about/hero-photo-3.png" alt="" />
+			<Image class="hero__photo hero__photo--a" src={heroPhoto1} alt="" loading="eager" fetchpriority="high" widths={[414, 621, 828]} sizes="30vw" />
+			<Image class="hero__photo hero__photo--b" src={heroPhoto2} alt="" loading="lazy" widths={[346, 519]} sizes="25vw" />
+			<Image class="hero__photo hero__photo--c" src={heroPhoto3} alt="" loading="lazy" widths={[266, 399]} sizes="20vw" />
 
-			<img class="hero__stat hero__stat--views" src="/images/about/stat-content-views.png" alt="14M+ Content Views" />
-			<img class="hero__stat hero__stat--partnerships" src="/images/about/stat-creator-partnerships.png" alt="450+ Creator Partnerships" />
-			<img class="hero__stat hero__stat--roi" src="/images/about/stat-roi.png" alt="312% Increase in ROI" />
+			<img class="hero__stat hero__stat--views" src="/images/about/stat-content-views.png" width="125" height="141" alt="14M+ Content Views" loading="lazy" />
+			<img class="hero__stat hero__stat--partnerships" src="/images/about/stat-creator-partnerships.png" width="170" height="120" alt="450+ Creator Partnerships" loading="lazy" />
+			<img class="hero__stat hero__stat--roi" src="/images/about/stat-roi.png" width="125" height="141" alt="312% Increase in ROI" loading="lazy" />
 		</div>
 	</div>
 </section>

@@ -27,6 +27,10 @@ const { title, description = 'SHOUT is the Creator Performance Platform built to
 	</body>
 </html>
 
+<script>
+	import '../scripts/animations.js';
+</script>
+
 <style is:global>
 	/*
 	  Design tokens pulled from Figma (get_variable_defs on node 1502:6087,
@@ -116,15 +120,21 @@ const { title, description = 'SHOUT is the Creator Performance Platform built to
 		font-size: clamp(2.75rem, 6.5vw, var(--font-size-display));
 		line-height: 0.8;
 		letter-spacing: -1px;
-		margin: 0 0 16px;
+		max-width: 900px;
+		margin: 0 auto 16px;
 	}
 
+	/* Figma's own heading box is 862px wide (confirmed via metadata) —
+	   the lede below it wraps narrower, at ~640px. Centered section
+	   wrapper divs no longer constrain width themselves (that squished
+	   the heading onto 3+ cramped lines); each element sizes itself. */
 	.section-lede {
 		font-weight: 600;
 		font-size: var(--font-size-h5);
 		line-height: 1.3;
 		color: var(--color-text-muted);
-		margin: 0;
+		max-width: 640px;
+		margin: 0 auto;
 	}
 
 	.button {
@@ -158,6 +168,25 @@ const { title, description = 'SHOUT is the Creator Performance Platform built to
 
 	section {
 		padding-block: 96px;
+	}
+
+	/* Word-stagger heading reveal (src/scripts/animations.js wraps each
+	   word in these on load, then animates .word-inner up into view). */
+	.word {
+		display: inline-block;
+		overflow: hidden;
+		vertical-align: top;
+	}
+
+	.word-inner {
+		display: inline-block;
+		will-change: transform;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.word-inner {
+			transform: none !important;
+		}
 	}
 
 	@media (max-width: 720px) {

@@ -1,4 +1,9 @@
 ---
+import { getImage } from 'astro:assets';
+import valueCardBgSrc from '../assets/about/value-card-bg.png';
+
+const valueCardBg = await getImage({ src: valueCardBgSrc, width: 900, format: 'webp' });
+
 // Copy verbatim from Figma nodes 1502:8010/8019/8069 (heading) and the six
 // card nodes 1502:8026/8031/8036/8041/8046/8051 (get_design_context).
 // Section background is white/default, NOT black — confirmed via
@@ -63,7 +68,10 @@ const values = [
 		<div class="values__grid">
 			{
 				values.map((value) => (
-					<article class={`values__card values__card--${value.variant}`}>
+					<article
+						class={`values__card values__card--${value.variant}`}
+						style={value.variant === 'photo' ? `--card-bg: url(${valueCardBg.src})` : undefined}
+					>
 						<h3>{value.title}</h3>
 						<p class="values__subtitle">{value.subtitle}</p>
 						<div class="values__body">
@@ -86,7 +94,6 @@ const values = [
 		align-items: center;
 		gap: 16px;
 		margin: 0 auto 56px;
-		max-width: 640px;
 	}
 
 	.values__accent {
@@ -107,6 +114,11 @@ const values = [
 		flex-direction: column;
 		justify-content: flex-end;
 		gap: 16px;
+		/* Card text is white regardless of the page's white section bg —
+		   confirmed via get_design_context: card content uses
+		   text-invert/primary. Lost when the section-level white text
+		   color was removed along with the (wrong) black section bg. */
+		color: var(--color-text-invert);
 	}
 
 	.values__card--purple {
@@ -114,9 +126,11 @@ const values = [
 	}
 
 	.values__card--photo {
-		background:
-			linear-gradient(180deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.55) 100%),
-			url('/images/about/value-card-bg.png');
+		/* --card-bg (the optimized asset URL) is set inline per-card, since
+		   Astro's image pipeline only processes <Image>/getImage output,
+		   not literal CSS url() paths. */
+		background-color: #111111;
+		background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.55) 100%), var(--card-bg, none);
 		background-size: cover;
 		background-position: center;
 	}

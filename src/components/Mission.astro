@@ -1,4 +1,7 @@
 ---
+import { Image } from 'astro:assets';
+import ribbon from '../assets/about/mission-ribbon.png';
+
 // Copy verbatim from Figma node 1505:4423. Heading now uses the shared
 // .section-heading style (confirmed 100px Bold Darker Grotesque via
 // get_design_context on sibling heading nodes 1502:8016/8019 — every
@@ -9,8 +12,8 @@
 ---
 
 <section class="mission">
-	<img class="mission__ribbon mission__ribbon--left" src="/images/about/mission-ribbon.png" alt="" aria-hidden="true" />
-	<img class="mission__ribbon mission__ribbon--right" src="/images/about/mission-ribbon.png" alt="" aria-hidden="true" />
+	<Image class="mission__ribbon mission__ribbon--left" src={ribbon} alt="" aria-hidden="true" loading="lazy" widths={[220, 340, 510]} sizes="340px" />
+	<Image class="mission__ribbon mission__ribbon--right" src={ribbon} alt="" aria-hidden="true" loading="lazy" widths={[220, 340, 510]} sizes="340px" />
 
 	<div class="container mission__inner">
 		<h2 class="section-heading mission__heading">

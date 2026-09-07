@@ -23,12 +23,21 @@ pulled directly from Figma via `get_variable_defs` and `get_design_context`
 on the relevant nodes. Component files note the source node IDs in their
 top comment.
 
-Real image assets from Daniel's exported `About.zip` are wired in under
-`public/images/about/`: the hero collage photos and pre-composited stat
-badges, the mission section's ribbon graphic, one core-values card
-background, all four leadership headshots, the team banner photo, and the
-join-CTA background photo. Pillar icons use the exact SVG paths from that
-export too (bolt / bar chart / heart).
+Real image assets from Daniel's exported `About.zip` are wired in. Most
+live under `src/assets/about/` and are imported through Astro's `<Image>`/
+`getImage()` (auto WebP conversion, responsive `srcset`, explicit
+dimensions to prevent layout shift, lazy-loading below the fold) — this
+is why `npm install` needs to fetch `sharp`, Astro's default image
+processor. The three pre-composited hero stat badges (already tiny,
+with text baked in — re-encoding risked blurring it) stay unoptimized
+under `public/images/about/`.
+
+## Animation
+
+`src/scripts/animations.js` (GSAP + ScrollTrigger, real npm deps, no CDN
+tag) wraps every `.section-heading` word in a span and staggers them up
+into view on scroll, and staggers each card grid's children in the same
+way. Respects `prefers-reduced-motion` — skips entirely if set.
 
 ## Remaining gaps
 

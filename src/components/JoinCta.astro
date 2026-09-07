@@ -1,13 +1,26 @@
 ---
+import { Image } from 'astro:assets';
+import ctaBg from '../assets/about/join-cta-bg.png';
+
 // Copy verbatim from Figma node 1511:795. Background is the real export
-// (join-cta-bg.png, "About-cta.png" in Daniel's About.zip).
+// (join-cta-bg.png, "About-cta.png" in Daniel's About.zip). Heading uses
+// the shared .section-heading style for consistency with every other
+// heading on the page.
 ---
 
 <section class="cta">
 	<div class="container cta__inner">
-		<img class="cta__bg" src="/images/about/join-cta-bg.png" alt="" aria-hidden="true" />
+		<Image
+			class="cta__bg"
+			src={ctaBg}
+			alt=""
+			aria-hidden="true"
+			loading="lazy"
+			widths={[656, 1312, 1968]}
+			sizes="(max-width: 900px) 100vw, 1312px"
+		/>
 		<div class="cta__content">
-			<h2>
+			<h2 class="section-heading cta__heading">
 				Build the future<br />
 				of creator marketing.
 			</h2>
@@ -60,15 +73,12 @@
 		gap: 24px;
 	}
 
-	.cta h2 {
-		font-weight: 600;
-		font-size: clamp(2.25rem, 6vw, var(--font-size-h1));
-		line-height: 0.8;
-		letter-spacing: -1px;
+	.cta__heading {
 		color: var(--color-text-invert);
+		margin-bottom: 0;
 	}
 
-	.cta p {
+	.cta__content p {
 		font-weight: 600;
 		font-size: var(--font-size-h5);
 		line-height: 1.4;

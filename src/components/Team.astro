@@ -1,4 +1,11 @@
 ---
+import { Image } from 'astro:assets';
+import teamBanner from '../assets/about/team-banner.png';
+import jordanPhoto from '../assets/about/team-jordan-blake.png';
+import mayaPhoto from '../assets/about/team-maya-chen.png';
+import alexPhoto from '../assets/about/team-alex-rees.png';
+import sophiePhoto from '../assets/about/team-sophie-moore.png';
+
 // Copy from Figma nodes 1502:8011/8020/8021/8070 (heading), 1502:8097-8108
 // (team cards), 1502:8109-8110 (wider team blurb + CTA card). Card style
 // (white bg, rounded-16, purple glow shadow) confirmed via
@@ -12,25 +19,25 @@ const team = [
 		name: 'Jordan Blake',
 		role: 'Founder',
 		bio: 'Exits. Scaling teams. Building platforms that drive real impact.',
-		photo: '/images/about/team-jordan-blake.png',
+		photo: jordanPhoto,
 	},
 	{
 		name: 'Maya Chen',
 		role: 'COO',
 		bio: 'Operations at scale. Turning complexity into performance.',
-		photo: '/images/about/team-maya-chen.png',
+		photo: mayaPhoto,
 	},
 	{
 		name: 'Alex Rees',
 		role: 'CTO',
 		bio: 'Platform architect. Data-driven products built for the future.',
-		photo: '/images/about/team-alex-rees.png',
+		photo: alexPhoto,
 	},
 	{
 		name: 'Sophie Moore',
 		role: 'CPO',
 		bio: 'Creator-first products that solve real problems.',
-		photo: '/images/about/team-sophie-moore.png',
+		photo: sophiePhoto,
 	},
 ];
 ---
@@ -46,7 +53,14 @@ const team = [
 			</p>
 		</div>
 
-		<img class="team__banner" src="/images/about/team-banner.png" alt="The SHOUT team collaborating" />
+		<Image
+			class="team__banner"
+			src={teamBanner}
+			alt="The SHOUT team collaborating"
+			loading="lazy"
+			widths={[656, 1312, 1968]}
+			sizes="(max-width: 900px) 100vw, 1312px"
+		/>
 
 		<h3 class="team__subheading">Meet the team</h3>
 
@@ -54,7 +68,7 @@ const team = [
 			{
 				team.map((person) => (
 					<article class="team__card">
-						<img class="team__avatar" src={person.photo} alt={person.name} />
+						<Image class="team__avatar" src={person.photo} alt={person.name} loading="lazy" widths={[220, 330, 440]} sizes="220px" />
 						<p class="team__role">{person.role}</p>
 						<p class="team__name">{person.name}</p>
 						<p class="team__bio">{person.bio}</p>
@@ -90,7 +104,6 @@ const team = [
 		align-items: center;
 		gap: 16px;
 		margin: 0 auto 48px;
-		max-width: 640px;
 	}
 
 	.team__accent {
