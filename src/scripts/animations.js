@@ -60,7 +60,7 @@ function initHeadingReveals() {
 }
 
 function initCardReveals() {
-	const groupSelectors = ['.pillars__grid', '.values__grid', '.team__grid', '.shift__timeline'];
+	const groupSelectors = ['.pillars__grid', '.values__grid', '.team__grid'];
 
 	document.querySelectorAll(groupSelectors.join(',')).forEach((group) => {
 		const items = Array.from(group.children);
@@ -82,9 +82,46 @@ function initCardReveals() {
 	});
 }
 
+// "The shift" timeline: the centre line fills as the section scrolls
+// through view (scrubbed, tied directly to scroll position), and each
+// row dims to 40% opacity except while it's the one centered in the
+// viewport — a lightweight "active step" cue, not a one-time reveal.
+function initTimelineScroll() {
+	const wrap = document.querySelector('.shift__timeline-wrap');
+	if (!wrap) return;
+
+	const fill = wrap.querySelector('.shift__line-fill');
+	if (fill) {
+		gsap.to(fill, {
+			scaleY: 1,
+			ease: 'none',
+			scrollTrigger: {
+				trigger: wrap,
+				start: 'top center',
+				end: 'bottom center',
+				scrub: true,
+			},
+		});
+	}
+
+	wrap.querySelectorAll('.shift__row').forEach((row) => {
+		gsap.set(row, { opacity: 0.4 });
+		ScrollTrigger.create({
+			trigger: row,
+			start: 'top center',
+			end: 'bottom center',
+			onEnter: () => gsap.to(row, { opacity: 1, duration: 0.3, overwrite: true }),
+			onEnterBack: () => gsap.to(row, { opacity: 1, duration: 0.3, overwrite: true }),
+			onLeave: () => gsap.to(row, { opacity: 0.4, duration: 0.3, overwrite: true }),
+			onLeaveBack: () => gsap.to(row, { opacity: 0.4, duration: 0.3, overwrite: true }),
+		});
+	});
+}
+
 if (!prefersReducedMotion) {
 	document.addEventListener('DOMContentLoaded', () => {
 		initHeadingReveals();
 		initCardReveals();
+		initTimelineScroll();
 	});
 }

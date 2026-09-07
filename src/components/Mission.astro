@@ -15,6 +15,8 @@ import ribbon from '../assets/about/mission-ribbon.png';
 	<Image class="mission__ribbon mission__ribbon--left" src={ribbon} alt="" aria-hidden="true" loading="lazy" width={680} />
 	<Image class="mission__ribbon mission__ribbon--right" src={ribbon} alt="" aria-hidden="true" loading="lazy" width={680} />
 
+	<div class="mission__glow" aria-hidden="true"></div>
+
 	<div class="container mission__inner">
 		<h2 class="section-heading mission__heading">
 			Creator marketing<br />
@@ -31,12 +33,28 @@ import ribbon from '../assets/about/mission-ribbon.png';
 <style>
 	.mission {
 		position: relative;
-		overflow: hidden;
 		text-align: center;
+		/* Taller than the default section padding so the ribbon graphics
+		   (which extend well past the text block) have room without
+		   needing overflow:hidden to clip them. */
+		padding-block: 160px;
+	}
+
+	.mission__glow {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: 900px;
+		height: 900px;
+		transform: translate(-50%, -50%);
+		background: radial-gradient(circle, rgba(101, 8, 251, 0.18) 0%, rgba(101, 8, 251, 0) 70%);
+		z-index: 0;
+		pointer-events: none;
 	}
 
 	.mission__inner {
 		position: relative;
+		z-index: 2;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -64,7 +82,7 @@ import ribbon from '../assets/about/mission-ribbon.png';
 	.mission__ribbon {
 		position: absolute;
 		width: 340px;
-		z-index: 0;
+		z-index: 1;
 		opacity: 0.9;
 	}
 
@@ -86,8 +104,17 @@ import ribbon from '../assets/about/mission-ribbon.png';
 	}
 
 	@media (max-width: 700px) {
+		.mission {
+			padding-block: 100px;
+		}
+
 		.mission__ribbon {
 			width: 220px;
+		}
+
+		.mission__glow {
+			width: 600px;
+			height: 600px;
 		}
 	}
 </style>

@@ -38,20 +38,25 @@ const steps = [
 			<p class="section-lede">We didn't tweak the old system. We built a new one.</p>
 		</div>
 
-		<ol class="shift__timeline">
-			{
-				steps.map((step) => (
-					<li class={`shift__row shift__row--${step.side}`}>
-						<span class="shift__number">{step.number}</span>
-						<div class="shift__content">
-							<p class="shift__label">{step.label}</p>
-							<h3>{step.title}</h3>
-							<p class="shift__body">{step.body}</p>
-						</div>
-					</li>
-				))
-			}
-		</ol>
+		<div class="shift__timeline-wrap">
+			<div class="shift__line" aria-hidden="true">
+				<div class="shift__line-fill"></div>
+			</div>
+			<ol class="shift__timeline">
+				{
+					steps.map((step) => (
+						<li class={`shift__row shift__row--${step.side}`}>
+							<span class="shift__number">{step.number}</span>
+							<div class="shift__content">
+								<p class="shift__label">{step.label}</p>
+								<h3>{step.title}</h3>
+								<p class="shift__body">{step.body}</p>
+							</div>
+						</li>
+					))
+				}
+			</ol>
+		</div>
 	</div>
 </section>
 
@@ -69,17 +74,22 @@ const steps = [
 		color: var(--color-purple);
 	}
 
-	.shift__timeline {
-		list-style: none;
-		margin: 0;
-		padding: 0;
+	.shift__timeline-wrap {
 		max-width: 900px;
 		margin-inline: auto;
 		position: relative;
 	}
 
-	.shift__timeline::before {
-		content: '';
+	.shift__timeline {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	/* Static track + a scroll-scrubbed fill (src/scripts/animations.js
+	   scales .shift__line-fill's height from 0 to 100% as the timeline
+	   scrolls through view). */
+	.shift__line {
 		position: absolute;
 		left: 50%;
 		top: 0;
@@ -89,12 +99,29 @@ const steps = [
 		transform: translateX(-50%);
 	}
 
+	.shift__line-fill {
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		background: var(--color-purple);
+		transform-origin: top;
+		transform: scaleY(0);
+	}
+
 	.shift__row {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 		align-items: center;
 		gap: 40px;
 		padding-block: 32px;
+		position: relative;
+		/* Full opacity by default (no-JS fallback). JS
+		   (src/scripts/animations.js, initTimelineScroll) dims rows to 40%
+		   until they're centered in view, once it confirms it can run the
+		   interaction — never left permanently dim if JS fails to load. */
+		opacity: 1;
 	}
 
 	.shift__number {
@@ -147,7 +174,7 @@ const steps = [
 	}
 
 	@media (max-width: 700px) {
-		.shift__timeline::before {
+		.shift__line {
 			left: 4px;
 		}
 
