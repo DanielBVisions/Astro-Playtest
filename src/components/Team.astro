@@ -127,18 +127,25 @@ const team = [
 
 	.team__grid {
 		display: grid;
-		grid-template-columns: repeat(5, 1fr);
+		grid-template-columns: repeat(5, minmax(0, 1fr));
 		gap: 16px;
 	}
 
+	/* Cards are ~250px wide by design (confirmed via get_design_context on
+	   1502:8092). max-width is a hard cap so a card can never balloon to
+	   fill its grid track — at narrower breakpoints the column count
+	   drops, but the card itself stays compact instead of stretching. */
 	.team__card {
 		background: var(--color-text-invert);
 		border-radius: var(--radius-card);
 		box-shadow: 0 25px 100px 0 rgba(101, 8, 251, 0.15);
 		padding: 15px;
+		width: 100%;
+		max-width: 260px;
 		aspect-ratio: 250 / 408;
 		display: flex;
 		flex-direction: column;
+		justify-self: center;
 	}
 
 	.team__avatar {
@@ -180,7 +187,10 @@ const team = [
 		flex-direction: column;
 		justify-content: space-between;
 		color: var(--color-text-invert);
+		width: 100%;
+		max-width: 260px;
 		aspect-ratio: 250 / 408;
+		justify-self: center;
 	}
 
 	.team__join-copy {
@@ -199,15 +209,25 @@ const team = [
 		justify-content: space-between;
 	}
 
-	@media (max-width: 900px) {
+	/* Column count steps down gradually so cards shrink with the
+	   viewport instead of jumping straight to 2 (which, with the
+	   max-width cap above removed, used to blow cards up to roughly
+	   half the page width on anything narrower than desktop). */
+	@media (max-width: 1100px) {
 		.team__grid {
-			grid-template-columns: 1fr 1fr;
+			grid-template-columns: repeat(3, minmax(0, 1fr));
 		}
 	}
 
-	@media (max-width: 560px) {
+	@media (max-width: 700px) {
 		.team__grid {
-			grid-template-columns: 1fr;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+
+	@media (max-width: 420px) {
+		.team__grid {
+			grid-template-columns: minmax(0, 1fr);
 		}
 	}
 </style>
